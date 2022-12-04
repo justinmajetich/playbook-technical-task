@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6926768702031561056, guid: 79f8a500d0773934d8188a962ace3ff4, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 1143
-      objectReference: {fileID: 0}
     - target: {fileID: 6926768702031561058, guid: 79f8a500d0773934d8188a962ace3ff4, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -288,14 +284,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 385626378997194753, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 385626380145245420, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 385626380772240214, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
       propertyPath: m_Name
       value: TransformControls
@@ -343,34 +331,6 @@ PrefabInstance:
     - target: {fileID: 385626380772240215, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 385626380840347705, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779231364296, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779241621592, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779411876917, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779574156441, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779835867614, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 692266779944797436, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38e6881769f10a41b9a1008e82ae10c, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 385626378997194756}
   - component: {fileID: 385626378997194755}
   - component: {fileID: 385626378997194758}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: yScale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 385626380145245423}
   - component: {fileID: 385626380145245422}
   - component: {fileID: 385626380145245409}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: zScale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   handles: {fileID: 7145694210987695243}
-  distanceFromCamera: 6
+  distanceFromCamera: 7
   translationStrengthModifier: 3
   rotationStrengthModifier: 1
   allowNegativeScaling: 0
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 385626380840347708}
   - component: {fileID: 385626380840347707}
   - component: {fileID: 385626380840347710}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: xScale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 1340824227851011357}
   - component: {fileID: 385626379631106460}
   - component: {fileID: 692266779231364297}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: xTranslation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 1340824227798813069}
   - component: {fileID: 385626379641492748}
   - component: {fileID: 692266779241621593}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: zTranslation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 1340824227360124384}
   - component: {fileID: 385626379677020519}
   - component: {fileID: 385626379677020536}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: yRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 1340824227476774220}
   - component: {fileID: 385626379839799755}
   - component: {fileID: 385626379839799756}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: xRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 1340824227246505995}
   - component: {fileID: 385626379026603138}
   - component: {fileID: 692266779835867615}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: yTranslation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 1340824226835621161}
   - component: {fileID: 385626379135547808}
   - component: {fileID: 385626379135547809}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: zRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -36,10 +35,11 @@ public class MenuItem : MonoBehaviour
         RefreshAppearance();
     }
 
-    // Update the button meshes to current item.
+    // Refresh this item's button mesh and rotation to reflect current object.
     public void RefreshAppearance()
     {
         button.GetComponent<MeshFilter>().mesh = itemPrefab.GetComponent<MeshFilter>().sharedMesh;
+        button.transform.rotation = itemPrefab.transform.rotation;
     }
 
     private void OnButtonDragStart()
@@ -51,6 +51,7 @@ public class MenuItem : MonoBehaviour
     {
         buttonIsBeingDragged = false;
 
+        // If button is dropped within the docking area, do not spawn.
         if (!buttonIsDocked)
             SpawnPrefab(button.transform);
 
@@ -62,16 +63,9 @@ public class MenuItem : MonoBehaviour
         m_Animator.SetBool("isHovered", isHovered);
     }
 
-    private void CheckDockForButton()
-    {
-        buttonIsDocked = Physics.OverlapSphere(transform.position, dockRadius, dockableLayer).Length > 0;
-
-        m_Animator.SetBool("isDocked", buttonIsDocked);
-    }
-
     private void SpawnPrefab(Transform spawnTransform)
     {
-        Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
+        Instantiate(itemPrefab, spawnTransform.position, itemPrefab.transform.rotation);
     }
 
     private void ReturnButtonToDock()
@@ -80,6 +74,10 @@ public class MenuItem : MonoBehaviour
         button.transform.position = transform.position;
     }
 
+    /// <summary>
+    /// While the button is being dragged, this coroutine monitor whether or not it lies within the dock area.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ActiveDock()
     {
         buttonIsBeingDragged = true;
@@ -90,5 +88,12 @@ public class MenuItem : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void CheckDockForButton()
+    {
+        buttonIsDocked = Physics.OverlapSphere(transform.position, dockRadius, dockableLayer).Length > 0;
+
+        m_Animator.SetBool("isDocked", buttonIsDocked);
     }
 }

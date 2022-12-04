@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1390395960981611416}
   - component: {fileID: 4119707018218806396}
   m_Layer: 6
-  m_Name: DraggableMenuButton
+  m_Name: DraggableMenuButton0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2476255317646941745}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cb4c20b2f9f8e36448da83930b6613a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +148,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563811806748823}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 6553691591525375004, guid: 5bd4996860480584eb84fc32f6a9089d, type: 3}
 --- !u!23 &2752563811806748821
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563811996816050}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4019234525060620036, guid: 52284f5ff49e5324a98a95d236428ea6, type: 3}
 --- !u!23 &2752563811996816049
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -241,8 +241,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563811996816050}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 2752563812081452586}
   - component: {fileID: 2752563812081452589}
   m_Layer: 6
-  m_Name: DraggableMenuButton
+  m_Name: DraggableMenuButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2752563812081452591}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -379,7 +379,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cb4c20b2f9f8e36448da83930b6613a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -474,12 +474,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objLibrary:
-  - {fileID: 1977448177073425728, guid: 4c4e43f40b3a4a1479ce4f26737e0ed1, type: 3}
-  - {fileID: 1977448177073425728, guid: 4c4e43f40b3a4a1479ce4f26737e0ed1, type: 3}
-  - {fileID: 5473688932095140261, guid: e97283a6088363149bb279d2f08f2c8a, type: 3}
-  - {fileID: 1977448177073425728, guid: 4c4e43f40b3a4a1479ce4f26737e0ed1, type: 3}
-  - {fileID: 5473688932095140261, guid: e97283a6088363149bb279d2f08f2c8a, type: 3}
-  - {fileID: 5473688932095140261, guid: e97283a6088363149bb279d2f08f2c8a, type: 3}
+  - {fileID: 7006389168953465464, guid: 3f6a65b857686b34a9bdd216ec476912, type: 3}
+  - {fileID: 7820971755265891360, guid: e367ba2ab2af4474ca1bb0ea0bfe2b74, type: 3}
+  - {fileID: 8981869195417930423, guid: 71c22de00dec7fd4c961821be359054f, type: 3}
+  - {fileID: 7141890091556904597, guid: f6adbf765095b864988e056d85b5f0ab, type: 3}
+  - {fileID: 8452052652531106574, guid: 52a1199275192844f994bbbc890071fc, type: 3}
   forwardArrow: {fileID: 2752563811996816079}
   backwardArrow: {fileID: 2752563813563074665}
 --- !u!1 &2752563812449545358
@@ -589,7 +588,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563812470423972}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 6553691591525375004, guid: 5bd4996860480584eb84fc32f6a9089d, type: 3}
 --- !u!23 &2752563812470423970
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -827,7 +826,7 @@ GameObject:
   - component: {fileID: 2752563812878219727}
   - component: {fileID: 2752563812878219726}
   m_Layer: 6
-  m_Name: DraggableMenuButton
+  m_Name: DraggableMenuButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +863,7 @@ MeshRenderer:
   m_GameObject: {fileID: 2752563812878219696}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -874,7 +873,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cb4c20b2f9f8e36448da83930b6613a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -961,7 +960,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563812930646111}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 6553691591525375004, guid: 5bd4996860480584eb84fc32f6a9089d, type: 3}
 --- !u!23 &2752563812930646109
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1031,13 +1030,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563813563074668}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2752563812475145407}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!33 &2752563813563074664
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1045,7 +1044,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563813563074668}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4019234525060620036, guid: 52284f5ff49e5324a98a95d236428ea6, type: 3}
 --- !u!23 &2752563813563074667
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1054,8 +1053,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2752563813563074668}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

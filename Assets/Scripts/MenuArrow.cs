@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 3D button functionality for menu arrows.
+/// </summary>
 public class MenuArrow : MonoBehaviour
 {
     public event Action OnClick;
-
     Animator m_Animator;
 
     private void Start() => m_Animator = GetComponent<Animator>();

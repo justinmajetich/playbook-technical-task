@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages object menu interactions and object library order.
+/// </summary>
 public class MenuContentManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> objLibrary = new List<GameObject>();
@@ -36,6 +39,9 @@ public class MenuContentManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotates the content of object library one position forward.
+    /// </summary>
     private void OnRotateLibraryForward()
     {
         GameObject temp = objLibrary[0];
@@ -45,6 +51,9 @@ public class MenuContentManager : MonoBehaviour
         AssignLibraryToMenuItems();
     }
 
+    /// <summary>
+    /// Rotates the content of object library one position backward.
+    /// </summary>
     private void OnRotateLibraryBackward()
     {
         GameObject temp = objLibrary[objLibrary.Count - 1];
