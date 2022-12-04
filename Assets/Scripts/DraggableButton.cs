@@ -16,7 +16,7 @@ public class DraggableButton : MonoBehaviour
 
     private void OnMouseDown()
     {
-        lastMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        lastMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
 
         OnDragStart?.Invoke();
     }
@@ -26,13 +26,13 @@ public class DraggableButton : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-        Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
 
         Vector3 delta = currentMousePos - lastMousePos;
 
         lastMousePos = currentMousePos;
 
-        transform.position += delta;
+        transform.position +=  new Vector3(delta.x, delta.y, 0f);
     }
 
     private void OnMouseUpAsButton()
