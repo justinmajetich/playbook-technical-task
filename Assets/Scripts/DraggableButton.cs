@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Draggable 3D button used with MenuItem for drag-and-drop object instantiation.
+/// </summary>
 public class DraggableButton : MonoBehaviour
 {
     public event Action<bool> OnHover;
@@ -8,28 +11,19 @@ public class DraggableButton : MonoBehaviour
     public event Action OnDragEnd;
 
     Vector3 lastMousePos = Vector3.zero;
-    bool isBeingDragged = false;
-
-    [SerializeField] bool enableRotation = false;
-    float rotationSpeed = 40f;
-
-    private void Update()
-    {
-        if (enableRotation && !isBeingDragged)
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-    }
 
     private void OnMouseEnter() => OnHover?.Invoke(true);
 
     private void OnMouseDown()
     {
-        isBeingDragged = true;
-
         lastMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
         OnDragStart?.Invoke();
     }
 
+    /// <summary>
+    /// Tracks the delta of current and last recorded mouse position on mouse drag.
+    /// </summary>
     private void OnMouseDrag()
     {
         Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -43,8 +37,6 @@ public class DraggableButton : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        isBeingDragged = false;
-
         OnDragEnd?.Invoke();
     }
 
