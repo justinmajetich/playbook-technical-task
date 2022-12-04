@@ -9,6 +9,7 @@ public class TransformControls : MonoBehaviour
     [SerializeField, Tooltip("Parent of handle objects")] GameObject handles;
 
     [Space]
+    [SerializeField] bool useLocalSpace = true;
 
     [SerializeField, Tooltip("The transformGizmo will maintain this constant distance from camera, regardless of target object's position in the scene.")] 
     float distanceFromCamera = 6f;
@@ -46,18 +47,19 @@ public class TransformControls : MonoBehaviour
             // Position gizmo at a set distance from the camera and in line with the target object.
             Vector3 cameraToTarget = targetTransform.position - Camera.main.transform.position;
 
-            transform.SetPositionAndRotation(Camera.main.transform.position + (cameraToTarget.normalized * distanceFromCamera), targetTransform.rotation);
+            Quaternion rotation = useLocalSpace ? targetTransform.rotation : Quaternion.identity;
+
+            transform.SetPositionAndRotation(Camera.main.transform.position + (cameraToTarget.normalized * distanceFromCamera), rotation);
         }
         else
         {
             handles.SetActive(false);
         }
-
     }
 
     private void OnLinearHandleDrag(Transformation transformation, Axis axis, Vector3 mouseDelta)
     {
-        Vector3 transformationAxis = ConvertLocalAxisToWorldSpace(axis);
+        Vector3 transformationAxis = ConvertAxisToWorldSpace(axis);
 
         if (transformation == Transformation.Translation)
             Translate(transformationAxis, mouseDelta);
@@ -87,7 +89,7 @@ public class TransformControls : MonoBehaviour
         float translationModifier = Vector3.Distance(Camera.main.transform.position, targetTransform.position) * translationStrengthModifier;
 
         // Multipy translation direction by magnitude of mouse movement and apply to object transform.
-        targetTransform.position += translationDir * translationModifier * mouseDelta.magnitude;
+        targetTransform.position += mouseDelta.magnitude * translationModifier * translationDir;
     }
 
     /// <summary>
@@ -101,7 +103,7 @@ public class TransformControls : MonoBehaviour
         Vector3 scalingDir = scalingAxis * Vector3.Dot(mouseDelta.normalized, scalingAxis);
 
         // Convert scalingDir to local space and scale vector by magnitude and modifier.
-        Vector3 localScalingDelta = (targetTransform.InverseTransformDirection(scalingDir) * scalingStrengthModifier * mouseDelta.magnitude);
+        Vector3 localScalingDelta = (mouseDelta.magnitude * scalingStrengthModifier * targetTransform.InverseTransformDirection(scalingDir));
 
         Vector3 newLocalScale = targetTransform.localScale + localScalingDelta;
 
@@ -128,7 +130,7 @@ public class TransformControls : MonoBehaviour
     private void Rotate(Axis axis, Vector3 mouseDelta, Vector3 initialDragPos)
     {
         // Convert local axis to world space.
-        Vector3 rotationAxis = ConvertLocalAxisToWorldSpace(axis);
+        Vector3 rotationAxis = ConvertAxisToWorldSpace(axis);
 
         // Get offset from control rig center to point on gimbal where mouse began drag.
         Vector3 gimbalOffset = initialDragPos - transform.position;
@@ -139,7 +141,7 @@ public class TransformControls : MonoBehaviour
         Vector3 dragAxis = Vector3.Cross(rotationAxis, gimbalOffset.normalized);
 
         // Take the dot product of the mouse delta and drag axis to determine the direction and influence of the mouse input on rotation.
-        targetTransform.Rotate(rotationAxis, Vector3.Dot(mouseDelta.normalized, dragAxis) * rotationStrengthModifier, Space.World);
+        targetTransform.Rotate(rotationAxis, Vector3.Dot(mouseDelta.normalized, dragAxis) * rotationStrengthModifier * mouseDelta.magnitude, Space.World);
     }
 
     /// <summary>
@@ -158,7 +160,7 @@ public class TransformControls : MonoBehaviour
     }
 
     /// <summary>
-    /// Converts an Axis enum into the target object's local space.
+    /// Converts an Axis enum from the target object's local space into world space.
     /// </summary>
     private Vector3 ConvertLocalAxisToWorldSpace(Axis axis)
     {
@@ -169,5 +171,49 @@ public class TransformControls : MonoBehaviour
             Axis.Z => targetTransform.forward,
             _ => Vector3.zero
         };
+    }
+
+    /// <summary>
+    /// Converts an Axis enum into world space.
+    /// </summary>
+    private Vector3 GetWorldSpaceAxis(Axis axis)
+    {
+        return axis switch
+        {
+            Axis.X => Vector3.right,
+            Axis.Y => Vector3.up,
+            Axis.Z => Vector3.forward,
+            _ => Vector3.zero
+        };
+    }
+
+
+    /// <summary>
+    /// Converts an Axis enum into world space.
+    /// </summary>
+    /// <param name="axis">Axis enum to be converted</param>
+    /// <returns></returns>
+    private Vector3 ConvertAxisToWorldSpace(Axis axis)
+    {
+        if (useLocalSpace)
+        {
+            return axis switch
+            {
+                Axis.X => targetTransform.right,
+                Axis.Y => targetTransform.up,
+                Axis.Z => targetTransform.forward,
+                _ => Vector3.zero
+            };
+        }
+        else
+        {
+            return axis switch
+            {
+                Axis.X => Vector3.right,
+                Axis.Y => Vector3.up,
+                Axis.Z => Vector3.forward,
+                _ => Vector3.zero
+            };
+        }
     }
 }
