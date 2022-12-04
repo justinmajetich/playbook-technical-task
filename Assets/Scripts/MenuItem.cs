@@ -65,7 +65,7 @@ public class MenuItem : MonoBehaviour
 
     private void SpawnPrefab(Transform spawnTransform)
     {
-        Instantiate(itemPrefab, spawnTransform.position, itemPrefab.transform.rotation);
+        Instantiate(itemPrefab, spawnTransform.position, Quaternion.identity);
     }
 
     private void ReturnButtonToDock()
