@@ -9,7 +9,7 @@ public class LinearHandle : ControlHandle
     public static event Action<Transformation, Axis, Vector3> OnDrag;
 
     [SerializeField] Axis axis;
-    [SerializeField] Transformation transformation;
+    public Transformation transformation;
 
     private void OnMouseDown()
     {

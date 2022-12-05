@@ -42,6 +42,9 @@ public class TransformControls : MonoBehaviour
         // Check if a target transform is still selected.
         ValidateTargetTransformStillSelected();
 
+        // Check for change in transformation space.
+        CheckForTransformationSpaceToggle();
+
         if (targetTransform != null)
         {
             // Position gizmo at a set distance from the camera and in line with the target object.
@@ -59,12 +62,12 @@ public class TransformControls : MonoBehaviour
 
     private void OnLinearHandleDrag(Transformation transformation, Axis axis, Vector3 mouseDelta)
     {
-        Vector3 transformationAxis = ConvertAxisToWorldSpace(axis);
+        Vector3 transformationVector = GetLinearTransformationVector(axis, mouseDelta);
 
         if (transformation == Transformation.Translation)
-            Translate(transformationAxis, mouseDelta);
+            Translate(transformationVector, mouseDelta);
         else
-            Scale(transformationAxis, mouseDelta);
+            Scale(transformationVector, mouseDelta);
     }
 
     private void OnTransformableObjectSelected(Transform selectedTransform)
@@ -78,32 +81,26 @@ public class TransformControls : MonoBehaviour
     /// <summary>
     /// Translates the target object along the given axis.
     /// </summary>
-    /// <param name="translationAxis">Enum representing the axis along which to translate.</param>
+    /// <param name="translationVector">Vector representing both the direction of transformation and the influence of mouse movement relative to the transformation axis.</param>
     /// <param name="mouseDelta">Mouse movement delta for current increment of drag.</param>
-    private void Translate(Vector3 translationAxis, Vector3 mouseDelta)
+    private void Translate(Vector3 translationVector, Vector3 mouseDelta)
     {
-        // Use dot product to determine the direction and influence of the mouse delta along the translation axis.
-        Vector3 translationDir = translationAxis * Vector3.Dot(mouseDelta.normalized, translationAxis);
-
         // Scale translation speed modifier by distance between camera plane and target transform.
         float translationModifier = Vector3.Distance(Camera.main.transform.position, targetTransform.position) * translationStrengthModifier;
 
         // Multipy translation direction by magnitude of mouse movement and apply to object transform.
-        targetTransform.position += mouseDelta.magnitude * translationModifier * translationDir;
+        targetTransform.position += mouseDelta.magnitude * translationModifier * translationVector;
     }
 
     /// <summary>
     /// Scales the target object along the given axis.
     /// </summary>
-    /// <param name="scalingAxis">Enum representing the axis along which to scale.</param>
+    /// <param name="scalingVector">Vector representing both the direction of transformation and the influence of mouse movement relative to the transformation axis.</param>
     /// <param name="mouseDelta">Mouse movement delta for current increment of drag.</param>
-    private void Scale(Vector3 scalingAxis, Vector3 mouseDelta)
+    private void Scale(Vector3 scalingVector, Vector3 mouseDelta)
     {
-        // Use dot product to determine the direction and influence of the mouse delta along the scaling axis.
-        Vector3 scalingDir = scalingAxis * Vector3.Dot(mouseDelta.normalized, scalingAxis);
-
         // Convert scalingDir to local space and scale vector by magnitude and modifier.
-        Vector3 localScalingDelta = (mouseDelta.magnitude * scalingStrengthModifier * targetTransform.InverseTransformDirection(scalingDir));
+        Vector3 localScalingDelta = mouseDelta.magnitude * scalingStrengthModifier * targetTransform.InverseTransformDirection(scalingVector);
 
         Vector3 newLocalScale = targetTransform.localScale + localScalingDelta;
 
@@ -159,34 +156,14 @@ public class TransformControls : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Converts an Axis enum from the target object's local space into world space.
-    /// </summary>
-    private Vector3 ConvertLocalAxisToWorldSpace(Axis axis)
+    private void CheckForTransformationSpaceToggle()
     {
-        return axis switch
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Axis.X => targetTransform.right,
-            Axis.Y => targetTransform.up,
-            Axis.Z => targetTransform.forward,
-            _ => Vector3.zero
-        };
+            useLocalSpace = !useLocalSpace;
+            ToggleScaleHandles();
+        }
     }
-
-    /// <summary>
-    /// Converts an Axis enum into world space.
-    /// </summary>
-    private Vector3 GetWorldSpaceAxis(Axis axis)
-    {
-        return axis switch
-        {
-            Axis.X => Vector3.right,
-            Axis.Y => Vector3.up,
-            Axis.Z => Vector3.forward,
-            _ => Vector3.zero
-        };
-    }
-
 
     /// <summary>
     /// Converts an Axis enum into world space.
@@ -214,6 +191,44 @@ public class TransformControls : MonoBehaviour
                 Axis.Z => Vector3.forward,
                 _ => Vector3.zero
             };
+        }
+    }
+
+    /// <summary>
+    /// Calculates the direction and strength of mouse delta influence along the transformation axis using the dot product of mouse delta and perceived transformation axis.
+    /// </summary>
+    /// <param name="axis">Enum representing the axis along which to transform.</param>
+    /// <param name="mouseDelta">Mouse movement delta for current operation.</param>
+    /// <returns>A vector representing both the direction of transformation and the influence of mouse movement relative to the transformation axis.</returns>
+    private Vector3 GetLinearTransformationVector(Axis axis, Vector3 mouseDelta)
+    {
+        Vector3 transformationAxis = ConvertAxisToWorldSpace(axis);
+
+        // Get the perceived operating axis relative to camera perpective for comparison with mouseDelta. This is useful when the transformation axis is parallel but offset from camera forward.
+        // For example, if the screen plane is perfectly perpendicular to a operating axis, the dot product of mouse delta and axis will be 0, and thus, mouse movement will have no effect.
+        // This interaction may be unintuitive to the user if the gizmo is offset from camera forward (i.e. because of perspective, it can be seen as a line rather than a point on the screen).
+        // By finding the perceived operating axis, we can compare it to the mouse delta and receive a more intuitive and apparent result.
+        Vector3 perceivedAxis = Quaternion.Euler(Vector3.Angle(Camera.main.transform.forward, (transform.position - Camera.main.transform.position).normalized), 0f, 0f) * transformationAxis;
+
+        // Use dot product to determine the direction and influence of the mouse delta along the transformation axis.
+        Vector3 transformationVector = transformationAxis * Vector3.Dot(mouseDelta.normalized, perceivedAxis);
+
+        return transformationVector;
+    }
+
+    /// <summary>
+    /// Toggle scaling handles' activation state. World space scale transformations are not supported and will be deativated when world space transformation is active.
+    /// </summary>
+    private void ToggleScaleHandles()
+    {
+        for (int i = 0; i < handles.transform.childCount; i++)
+        {
+            LinearHandle handle = handles.transform.GetChild(i).gameObject.GetComponent<LinearHandle>();
+
+            if (handle != null && handle.transformation == Transformation.Scale)
+            {
+                handles.transform.GetChild(i).gameObject.SetActive(!handles.transform.GetChild(i).gameObject.activeSelf);
+            }
         }
     }
 }
